@@ -221,7 +221,7 @@ export default function ExpensesPage() {
                 <p className="text-xs text-white/30">{formatDate(e.date)}{e.comment ? ` · ${e.comment}` : ''}</p>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-danger font-semibold text-sm tabular-nums">−{formatMoney(e.amount)}</span>
+                <span className="text-white/80 font-semibold text-sm tabular-nums">{formatMoney(e.amount)}</span>
                 <button onClick={() => deleteExpense(e.id)} className="text-white/20 hover:text-danger p-1">
                   <Trash2 size={14} />
                 </button>
