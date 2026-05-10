@@ -7,7 +7,6 @@ import { ru } from 'date-fns/locale'
 import { Plus, TrendingUp, ChevronLeft, ChevronRight, AlertTriangle } from 'lucide-react'
 import { formatMoney, formatDate, getDurationHours } from '@/lib/utils'
 import { DashboardSkeleton } from '@/components/ui/skeleton'
-import { ActiveShiftBanner, StartShiftButton } from '@/components/shifts/active-shift-banner'
 import { useState } from 'react'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
@@ -91,10 +90,6 @@ export default function DashboardPage() {
 
   return (
     <div className="animate-fade-in space-y-4">
-      {/* Active shift */}
-      <ActiveShiftBanner />
-      <StartShiftButton />
-
       {/* Month picker — centered row */}
       <div className="flex justify-center">
         <MonthPicker date={month} onChange={setMonth} />

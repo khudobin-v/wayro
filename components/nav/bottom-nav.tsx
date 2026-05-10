@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { House, ClipboardText, Invoice, Coins, ChartBar, Gear } from '@phosphor-icons/react'
 import { WayroWordmark } from '@/components/ui/wayro-logo'
+import { ActiveShiftBanner, StartShiftButton } from '@/components/shifts/active-shift-banner'
 import { cn } from '@/lib/utils'
 
 const tabs = [
@@ -54,8 +55,12 @@ export function SideNav() {
 
   return (
     <nav className="glass-sidebar w-56 flex-shrink-0 flex flex-col gap-0.5 py-6 px-3 min-h-screen">
-      <div className="flex items-center gap-2.5 px-3 mb-7">
+      <div className="flex items-center gap-2.5 px-3 mb-5">
         <WayroWordmark />
+      </div>
+      <div className="px-1 mb-4 space-y-2">
+        <ActiveShiftBanner />
+        <StartShiftButton />
       </div>
       {tabs.map(({ href, icon: Icon, label }) => {
         const active = pathname === href || pathname.startsWith(href + '/')
