@@ -90,7 +90,7 @@ export default function DashboardPage() {
     : null
 
   return (
-    <div className="animate-fade-in space-y-4">
+    <div className="animate-fade-in space-y-4 pb-36 md:pb-0">
       {/* Floating shift button — mobile only */}
       <div className="md:hidden fixed bottom-[76px] left-0 right-0 z-40 px-4 space-y-2">
         <ActiveShiftBanner />
