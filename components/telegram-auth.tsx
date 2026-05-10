@@ -13,6 +13,8 @@ export function TelegramAuth() {
 
     tg.ready()
     tg.expand()
+    tg.requestFullscreen?.()
+    tg.disableVerticalSwipes?.()
 
     const initData = tg.initData
     if (!initData) return
