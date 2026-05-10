@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from 'next'
-import { Space_Grotesk } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-space',
+const ttHoves = localFont({
+  src: './fonts/TTHovesProVariable.ttf',
+  variable: '--font-tt-hoves',
   display: 'swap',
 })
 
@@ -35,7 +34,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className={spaceGrotesk.variable}>
+    <html lang="ru" className={ttHoves.variable}>
       <body>{children}</body>
     </html>
   )

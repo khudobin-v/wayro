@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --font-space: 'Space Grotesk', system-ui, sans-serif;
+  --font-tt-hoves: 'TT Hoves Pro', system-ui, sans-serif;
 }
 
 * {
@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  font-family: var(--font-space);
+  font-family: var(--font-tt-hoves);
   background-color: #080B12;
   color: #ffffff;
   -webkit-font-smoothing: antialiased;
