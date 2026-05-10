@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
+import Script from 'next/script'
+import { TelegramAuth } from '@/components/telegram-auth'
 import './globals.css'
 
 const ttHoves = localFont({
@@ -35,7 +37,11 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" className={ttHoves.variable}>
-      <body>{children}</body>
+      <body>
+        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
+        <TelegramAuth />
+        {children}
+      </body>
     </html>
   )
 }
