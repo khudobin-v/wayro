@@ -15,22 +15,22 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 function MonthPicker({ date, onChange }: { date: Date; onChange: (d: Date) => void }) {
   const label = format(date, 'LLLL yyyy', { locale: ru })
   return (
-    <div className="flex items-center gap-3">
+    <div className="glass rounded-full flex items-center px-1 py-1 gap-1">
       <button
         onClick={() => onChange(subMonths(date, 1))}
-        className="w-8 h-8 rounded-xl glass flex items-center justify-center text-white/40 hover:text-white transition-all"
+        className="w-7 h-7 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-white/8 transition-all"
       >
-        <ChevronLeft size={15} />
+        <ChevronLeft size={14} />
       </button>
-      <span className="text-sm font-semibold capitalize text-white/70 min-w-[140px] text-center tracking-wide">
+      <span className="text-sm font-semibold capitalize text-white/80 px-2 min-w-[120px] text-center">
         {label}
       </span>
       <button
         onClick={() => onChange(subMonths(date, -1))}
-        className="w-8 h-8 rounded-xl glass flex items-center justify-center text-white/40 hover:text-white transition-all disabled:opacity-20"
+        className="w-7 h-7 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-white/8 transition-all disabled:opacity-20"
         disabled={date >= startOfMonth(new Date())}
       >
-        <ChevronRight size={15} />
+        <ChevronRight size={14} />
       </button>
     </div>
   )
@@ -95,6 +95,11 @@ export default function DashboardPage() {
       <ActiveShiftBanner />
       <StartShiftButton />
 
+      {/* Month picker — centered row */}
+      <div className="flex justify-center">
+        <MonthPicker date={month} onChange={setMonth} />
+      </div>
+
       {/* Desktop: 2-column grid / Mobile: single column */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
 
@@ -104,10 +109,7 @@ export default function DashboardPage() {
           {/* Main metric */}
           <div className="glass-heavy rounded-3xl px-6 py-6 relative overflow-hidden">
             <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-[10px] text-white/35 font-semibold uppercase tracking-widest">Чистый доход</p>
-              <MonthPicker date={month} onChange={setMonth} />
-            </div>
+            <p className="text-[10px] text-white/35 font-semibold uppercase tracking-widest mb-2">Чистый доход</p>
             <p className={`text-5xl font-extrabold tabular-nums tracking-tight ${netPositive ? 'text-accent' : 'text-danger'}`}>
               {formatMoney(totals.net)}
             </p>
