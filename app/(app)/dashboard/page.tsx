@@ -78,7 +78,6 @@ export default function DashboardPage() {
   if (isLoading || !data || !data.totals) {
     return (
       <div className="space-y-4">
-        {header}
         <DashboardSkeleton />
       </div>
     )
@@ -92,8 +91,6 @@ export default function DashboardPage() {
 
   return (
     <div className="animate-fade-in space-y-4">
-      {header}
-
       {/* Active shift */}
       <ActiveShiftBanner />
       <StartShiftButton />
@@ -107,7 +104,10 @@ export default function DashboardPage() {
           {/* Main metric */}
           <div className="glass-heavy rounded-3xl px-6 py-6 relative overflow-hidden">
             <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            <p className="text-[10px] text-white/35 font-semibold uppercase tracking-widest mb-2">Чистый доход</p>
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-[10px] text-white/35 font-semibold uppercase tracking-widest">Чистый доход</p>
+              <MonthPicker date={month} onChange={setMonth} />
+            </div>
             <p className={`text-5xl font-extrabold tabular-nums tracking-tight ${netPositive ? 'text-accent' : 'text-danger'}`}>
               {formatMoney(totals.net)}
             </p>
