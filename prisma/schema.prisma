@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  shifts       Shift[]
+  expenses     Expense[]
+  reserves     Reserve[]
+  sessions     Session[]
+  settings     Settings?
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  userAgent String?
+}
+
+model Shift {
+  id                String         @id @default(cuid())
+  userId            String
+  user              User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status            String         @default("completed")
+  date              DateTime
+  startTime         DateTime?
+  endTime           DateTime?
+  distanceKm        Float          @default(0)
+  grossEarnings     Float          @default(0)
+  bonuses           Float          @default(0)
+  tips              Float          @default(0)
+  parkCommission    Float          @default(0)
+  serviceCommission Float          @default(0)
+  netEarnings       Float          @default(0)
+  ordersCount       Int            @default(0)
+  comment           String?
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  reserveEntries    ReserveEntry[]
+  expenses          Expense[]
+  liveOrders        ShiftOrder[]
+}
+
+model ShiftOrder {
+  id        String   @id @default(cuid())
+  shiftId   String
+  shift     Shift    @relation(fields: [shiftId], references: [id], onDelete: Cascade)
+  amount    Float
+  type      String   @default("delivery")
+  note      String?
+  createdAt DateTime @default(now())
+}
+
+model Expense {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date          DateTime
+  category      String
+  amount        Float
+  comment       String?
+  shiftId       String?
+  shift         Shift?   @relation(fields: [shiftId], references: [id])
+  liters        Float?
+  pricePerLiter Float?
+  createdAt     DateTime @default(now())
+}
+
+model Reserve {
+  id             String         @id @default(cuid())
+  userId         String
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name           String
+  type           String
+  balance        Float          @default(0)
+  goal           Float?
+  costPerEvent   Float?
+  intervalKm     Float?
+  currentKm      Float?
+  taxPercent     Float?
+  intervalMonths Float?
+  lastAccruedAt  DateTime?
+  isActive       Boolean        @default(true)
+  createdAt      DateTime       @default(now())
+  entries        ReserveEntry[]
+}
+
+model ReserveEntry {
+  id        String   @id @default(cuid())
+  reserveId String
+  reserve   Reserve  @relation(fields: [reserveId], references: [id], onDelete: Cascade)
+  shiftId   String?
+  shift     Shift?   @relation(fields: [shiftId], references: [id])
+  amount    Float
+  type      String
+  comment   String?
+  createdAt DateTime @default(now())
+}
+
+model Settings {
+  id                      String   @id @default(cuid())
+  userId                  String   @unique
+  user                    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  maintenanceCost         Float?
+  maintenanceInterval     Float?
+  currentOdometer         Float?
+  taxMode                 String?
+  taxPercent              Float?
+  tiresCost               Float?
+  tiresIntervalMonths     Float?
+  insuranceCost           Float?
+  insuranceIntervalMonths Float?
+  fuelConsumption         Float?
+  targetMonthlyIncome     Float?
+  forecastShifts          Int      @default(10)
+  theme                   String   @default("dark")
+  parkCommissionEnabled   Boolean  @default(true)
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+}
