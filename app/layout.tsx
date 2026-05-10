@@ -13,7 +13,16 @@ export const metadata: Metadata = {
   title: 'Wayro — трекер доходов курьера',
   description: 'Трекер доходов, расходов и резервов для автокурьера Яндекс.Доставки',
   manifest: '/manifest.json',
-  appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: 'Wayro' },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Wayro',
+    startupImage: '/icon-512.png',
+  },
+  icons: {
+    icon: '/icon-192.png',
+    apple: '/icon-512.png',
+  },
 }
 
 export const viewport: Viewport = {
