@@ -36,11 +36,14 @@ export async function POST(req: NextRequest) {
   const email = `tg_${tgUser.id}@wayro.internal`
   const name = [tgUser.first_name, tgUser.last_name].filter(Boolean).join(' ') || tgUser.username || 'Пользователь'
 
+  const chatId = String(tgUser.id)
   let user = await prisma.user.findUnique({ where: { email } })
   if (!user) {
     user = await prisma.user.create({
-      data: { email, name, passwordHash: crypto.randomBytes(32).toString('hex') },
+      data: { email, name, passwordHash: crypto.randomBytes(32).toString('hex'), telegramChatId: chatId },
     })
+  } else if (!user.telegramChatId) {
+    user = await prisma.user.update({ where: { id: user.id }, data: { telegramChatId: chatId } })
   }
 
   const ACCESS = 60 * 60

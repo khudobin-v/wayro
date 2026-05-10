@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getAuthFromRequest } from './lib/auth'
 
-const PUBLIC_PATHS = ['/login', '/register', '/api/auth/login', '/api/auth/register', '/api/auth/telegram']
+const PUBLIC_PATHS = ['/login', '/register', '/api/auth/login', '/api/auth/register', '/api/auth/telegram', '/api/telegram/webhook', '/api/cron/']
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
