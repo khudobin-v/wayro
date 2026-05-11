@@ -26,19 +26,19 @@ const TIME_SLOTS = [
 ]
 
 const tooltipStyle = {
-  backgroundColor: 'rgba(10,14,22,0.95)',
-  border: '1px solid rgba(255,255,255,0.08)',
+  backgroundColor: '#FFFFFF',
+  border: '1px solid #E5E7EB',
   borderRadius: '12px',
-  color: '#fff',
+  color: '#111827',
   fontSize: 12,
-  boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+  boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="glass rounded-2xl px-5 py-4 relative overflow-hidden">
-      <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      <h2 className="font-semibold text-sm text-white/80 mb-4">{title}</h2>
+      <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+      <h2 className="font-semibold text-sm text-gray-800 mb-4">{title}</h2>
       {children}
     </div>
   )
@@ -71,8 +71,8 @@ export default function AnalyticsPage() {
               onClick={() => setPeriod(i)}
               className={`text-xs px-3.5 py-1.5 rounded-full border transition-all ${
                 period === i
-                  ? 'border-accent/40 bg-accent/10 text-accent'
-                  : 'border-white/8 text-white/35 glass hover:text-white/60'
+                  ? 'border-accent bg-accent text-gray-900'
+                  : 'border-gray-200 text-gray-400 glass hover:text-gray-600'
               }`}
             >
               {p.label}
@@ -95,12 +95,12 @@ export default function AnalyticsPage() {
             >
               <XAxis
                 dataKey="label"
-                tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: 11, fontWeight: 500 }}
+                tick={{ fill: '#9CA3AF', fontSize: 11, fontWeight: 500 }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fill: 'rgba(255,255,255,0.25)', fontSize: 10 }}
+                tick={{ fill: '#9CA3AF', fontSize: 10 }}
                 axisLine={false}
                 tickLine={false}
                 tickFormatter={formatK}
@@ -109,19 +109,19 @@ export default function AnalyticsPage() {
               <Tooltip
                 contentStyle={tooltipStyle}
                 formatter={(v: number, name: string) => [formatMoney(v), name === 'gross' ? 'Чистый доход' : 'Расходы']}
-                labelStyle={{ color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}
-                itemStyle={{ color: '#fff' }}
-                cursor={{ fill: 'rgba(255,255,255,0.03)' }}
+                labelStyle={{ color: '#6B7280', marginBottom: 4 }}
+                itemStyle={{ color: '#111827' }}
+                cursor={{ fill: 'rgba(0,0,0,0.04)' }}
               />
               <Bar dataKey="gross" name="gross" radius={[6, 6, 2, 2]} maxBarSize={40}>
                 <LabelList
                   dataKey="gross"
                   position="top"
                   formatter={(v: number) => v > 0 ? formatK(v) : ''}
-                  style={{ fill: 'rgba(255,255,255,0.35)', fontSize: 10, fontWeight: 500 }}
+                  style={{ fill: '#9CA3AF', fontSize: 10, fontWeight: 500 }}
                 />
                 {Array.isArray(monthly) && (monthly as { net: number }[]).map((entry, i) => (
-                  <Cell key={i} fill={entry.net > 0 ? '#4ADE80' : 'rgba(248,113,113,0.7)'} />
+                  <Cell key={i} fill={entry.net > 0 ? '#FFD21E' : 'rgba(239,68,68,0.7)'} />
                 ))}
               </Bar>
               <Bar dataKey="expenses" name="expenses" fill="rgba(248,113,113,0.5)" radius={[4, 4, 2, 2]} maxBarSize={40} />
@@ -131,11 +131,11 @@ export default function AnalyticsPage() {
         <div className="flex items-center gap-4 mt-2">
           <div className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded-sm bg-accent" />
-            <span className="text-xs text-white/35">Доход</span>
+            <span className="text-xs text-gray-400">Доход</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded-sm bg-danger/50" />
-            <span className="text-xs text-white/35">Расходы</span>
+            <span className="text-xs text-gray-400">Расходы</span>
           </div>
         </div>
       </Section>
@@ -158,9 +158,9 @@ export default function AnalyticsPage() {
                   <div className="flex justify-center mb-1.5">
                     <Icon size={22} weight="fill" className={color} />
                   </div>
-                  <p className="text-[10px] text-white/35 font-medium">{label}</p>
-                  <p className="text-[10px] text-white/20 mb-1.5">{sub}</p>
-                  <p className={`text-sm font-bold tabular-nums ${isMax ? 'text-accent' : 'text-white/70'}`}>
+                  <p className="text-[10px] text-gray-400 font-medium">{label}</p>
+                  <p className="text-[10px] text-gray-300 mb-1.5">{sub}</p>
+                  <p className={`text-sm font-bold tabular-nums ${isMax ? 'text-gray-900' : 'text-gray-700'}`}>
                     {val > 0 ? `${Math.round(val)}₽` : '—'}
                   </p>
                 </div>
@@ -186,12 +186,12 @@ export default function AnalyticsPage() {
             >
               <XAxis
                 dataKey="label"
-                tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: 11, fontWeight: 500 }}
+                tick={{ fill: '#9CA3AF', fontSize: 11, fontWeight: 500 }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fill: 'rgba(255,255,255,0.25)', fontSize: 10 }}
+                tick={{ fill: '#9CA3AF', fontSize: 10 }}
                 axisLine={false}
                 tickLine={false}
                 tickFormatter={formatK}
@@ -200,16 +200,16 @@ export default function AnalyticsPage() {
               <Tooltip
                 contentStyle={tooltipStyle}
                 formatter={(v: number) => [`${v} ₽/ч`, 'Доход/час']}
-                labelStyle={{ color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}
-                itemStyle={{ color: '#fff' }}
-                cursor={{ fill: 'rgba(255,255,255,0.04)' }}
+                labelStyle={{ color: '#6B7280', marginBottom: 4 }}
+                itemStyle={{ color: '#111827' }}
+                cursor={{ fill: 'rgba(0,0,0,0.03)' }}
               />
               <Bar dataKey="value" radius={[5, 5, 2, 2]} maxBarSize={36}>
                 <LabelList
                   dataKey="value"
                   position="top"
                   formatter={(v: number) => v > 0 ? `${v}` : ''}
-                  style={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10, fontWeight: 500 }}
+                  style={{ fill: '#9CA3AF', fontSize: 10, fontWeight: 500 }}
                 />
                 {DAYS.map((_, i) => (
                   <Cell key={i} fill={i === 0 || i === 6 ? 'rgba(251,191,36,0.7)' : 'rgba(96,165,250,0.7)'} />
@@ -221,11 +221,11 @@ export default function AnalyticsPage() {
         <div className="flex items-center gap-4 mt-2">
           <div className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded-sm bg-info/70" />
-            <span className="text-xs text-white/35">Будни</span>
+            <span className="text-xs text-gray-400">Будни</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded-sm bg-warning/70" />
-            <span className="text-xs text-white/35">Выходные</span>
+            <span className="text-xs text-gray-400">Выходные</span>
           </div>
         </div>
       </Section>
@@ -238,15 +238,15 @@ export default function AnalyticsPage() {
               id: string; date: string; netEarnings: number; distanceKm: number; incomePerHour: number
             }, i: number) => (
               <div key={s.id} className="flex items-center gap-3">
-                <span className={`text-xs font-bold w-5 text-center ${i === 0 ? 'text-warning' : 'text-white/20'}`}>
+                <span className={`text-xs font-bold w-5 text-center ${i === 0 ? 'text-warning' : 'text-gray-300'}`}>
                   {i + 1}
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-white/80">{formatDate(s.date)}</span>
-                    <span className="text-accent font-bold text-sm tabular-nums">{formatMoney(s.netEarnings)}</span>
+                    <span className="text-sm text-gray-800">{formatDate(s.date)}</span>
+                    <span className="text-gray-900 font-bold text-sm tabular-nums">{formatMoney(s.netEarnings)}</span>
                   </div>
-                  <p className="text-xs text-white/25 mt-0.5">{Math.round(s.incomePerHour)} ₽/ч · {s.distanceKm} км</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{Math.round(s.incomePerHour)} ₽/ч · {s.distanceKm} км</p>
                 </div>
               </div>
             ))}

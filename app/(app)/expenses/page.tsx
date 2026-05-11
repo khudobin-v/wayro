@@ -18,7 +18,7 @@ const CATEGORIES = [
   { key: 'wash',         label: 'Мойка',     icon: WashingMachine,  color: 'text-sky-400',    hex: '#38BDF8' },
   { key: 'communication',label: 'Связь',     icon: Phone,           color: 'text-purple-400', hex: '#C084FC' },
   { key: 'food',         label: 'Питание',   icon: Utensils,        color: 'text-orange-400', hex: '#FB923C' },
-  { key: 'other',        label: 'Прочее',    icon: MoreHorizontal,  color: 'text-white/40',   hex: '#6B7280' },
+  { key: 'other',        label: 'Прочее',    icon: MoreHorizontal,  color: 'text-gray-400',   hex: '#6B7280' },
 ]
 
 const catMap = Object.fromEntries(CATEGORIES.map((c) => [c.key, c]))
@@ -35,12 +35,12 @@ interface ExpenseFormState {
 }
 
 const tooltipStyle = {
-  backgroundColor: 'rgba(10,14,22,0.95)',
-  border: '1px solid rgba(255,255,255,0.08)',
+  backgroundColor: '#FFFFFF',
+  border: '1px solid #E5E7EB',
   borderRadius: '12px',
-  color: '#fff',
+  color: '#111827',
   fontSize: 12,
-  boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+  boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
 }
 
 export default function ExpensesPage() {
@@ -108,7 +108,7 @@ export default function ExpensesPage() {
     : []
 
   const total = expenses?.reduce((s, e) => s + e.amount, 0) ?? 0
-  const inp = 'w-full glass rounded-xl px-4 py-3 text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/30 transition-colors'
+  const inp = 'w-full glass rounded-xl px-4 py-3 text-sm placeholder:text-gray-300 focus:outline-none focus:border-accent/30 transition-colors'
 
   return (
     <div className="space-y-3 animate-fade-in">
@@ -126,7 +126,7 @@ export default function ExpensesPage() {
         {PERIODS.map((p, i) => (
           <button key={p.label} onClick={() => setPeriod(i)}
             className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-              period === i ? 'border-accent/50 bg-accent/10 text-accent' : 'border-white/8 text-white/35 glass hover:text-white/60'
+              period === i ? 'border-accent bg-accent text-gray-900' : 'border-gray-200 text-gray-400 glass hover:text-gray-600'
             }`}
           >{p.label}</button>
         ))}
@@ -137,7 +137,7 @@ export default function ExpensesPage() {
         <Skeleton className="h-48 rounded-3xl" />
       ) : total > 0 ? (
         <div className="glass rounded-3xl px-5 py-4 relative overflow-hidden">
-          <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+          <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
 
             {/* Bar chart */}
           <div className="h-36">
@@ -145,17 +145,17 @@ export default function ExpensesPage() {
               <BarChart data={totalByCategory} barCategoryGap="30%" margin={{ top: 4, right: 0, left: 0, bottom: 0 }}>
                 <XAxis
                   dataKey="label"
-                  tick={{ fill: 'rgba(255,255,255,0.35)', fontSize: 10 }}
+                  tick={{ fill: '#9CA3AF', fontSize: 10 }}
                   axisLine={false}
                   tickLine={false}
                 />
                 <YAxis hide />
                 <Tooltip
                   contentStyle={tooltipStyle}
-                  cursor={{ fill: 'rgba(255,255,255,0.04)' }}
+                  cursor={{ fill: 'rgba(0,0,0,0.03)' }}
                   formatter={(v: number) => [formatMoney(v), '']}
-                  labelStyle={{ color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}
-                  itemStyle={{ color: '#fff' }}
+                  labelStyle={{ color: '#6B7280', marginBottom: 4 }}
+                  itemStyle={{ color: '#111827' }}
                 />
                 <Bar dataKey="total" radius={[6, 6, 0, 0]} maxBarSize={48}>
                   {totalByCategory.map((cat) => (
@@ -173,8 +173,8 @@ export default function ExpensesPage() {
               return (
                 <div key={cat.key} className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: cat.hex }} />
-                  <span className="text-xs text-white/50 truncate flex-1">{cat.label}</span>
-                  <span className="text-xs text-white/30 tabular-nums">{pct}%</span>
+                  <span className="text-xs text-gray-500 truncate flex-1">{cat.label}</span>
+                  <span className="text-xs text-gray-400 tabular-nums">{pct}%</span>
                   <span className="text-xs font-semibold tabular-nums">{formatMoney(cat.total)}</span>
                 </div>
               )
@@ -200,7 +200,7 @@ export default function ExpensesPage() {
 
       {!isLoading && expenses?.length === 0 && (
         <div className="text-center py-16">
-          <p className="text-white/30 mb-4">Расходов нет</p>
+          <p className="text-gray-400 mb-4">Расходов нет</p>
           <button onClick={() => setShowForm(true)} className="bg-accent text-black text-sm font-semibold px-5 py-2.5 rounded-full inline-flex items-center gap-1.5">
             <Plus size={16} /> Добавить расход
           </button>
@@ -213,16 +213,16 @@ export default function ExpensesPage() {
           const Icon = cat?.icon ?? MoreHorizontal
           return (
             <div key={e.id} className="glass rounded-2xl px-4 py-3 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
-                <Icon size={15} className={cat?.color ?? 'text-white/40'} />
+              <div className="w-8 h-8 rounded-xl bg-gray-50 flex items-center justify-center flex-shrink-0">
+                <Icon size={15} className={cat?.color ?? 'text-gray-400'} />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium">{cat?.label ?? e.category}</p>
-                <p className="text-xs text-white/30">{formatDate(e.date)}{e.comment ? ` · ${e.comment}` : ''}</p>
+                <p className="text-xs text-gray-400">{formatDate(e.date)}{e.comment ? ` · ${e.comment}` : ''}</p>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-white/80 font-semibold text-sm tabular-nums">{formatMoney(e.amount)}</span>
-                <button onClick={() => deleteExpense(e.id)} className="text-white/20 hover:text-danger p-1">
+                <span className="text-gray-800 font-semibold text-sm tabular-nums">{formatMoney(e.amount)}</span>
+                <button onClick={() => deleteExpense(e.id)} className="text-gray-300 hover:text-danger p-1">
                   <Trash2 size={14} />
                 </button>
               </div>
@@ -234,11 +234,11 @@ export default function ExpensesPage() {
       <Modal open={showForm} onClose={() => setShowForm(false)} title="Новый расход">
         <form onSubmit={handleSubmit} className="px-5 py-4 space-y-3">
           <div>
-            <label className="block text-xs text-white/35 mb-1.5 font-medium">Дата *</label>
+            <label className="block text-xs text-gray-400 mb-1.5 font-medium">Дата *</label>
             <input type="date" value={form.date} onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))} className={inp} required />
           </div>
           <div>
-            <label className="block text-xs text-white/35 mb-1.5 font-medium">Категория</label>
+            <label className="block text-xs text-gray-400 mb-1.5 font-medium">Категория</label>
             <div className="grid grid-cols-3 gap-1.5">
               {CATEGORIES.map((cat) => {
                 const Icon = cat.icon
@@ -246,7 +246,7 @@ export default function ExpensesPage() {
                   <button key={cat.key} type="button"
                     onClick={() => setForm((f) => ({ ...f, category: cat.key }))}
                     className={`flex flex-col items-center gap-1 py-2.5 rounded-xl border text-xs transition-colors ${
-                      form.category === cat.key ? 'border-accent/50 bg-accent/10 text-accent' : 'border-white/8 text-white/35 glass'
+                      form.category === cat.key ? 'border-accent bg-accent text-gray-900' : 'border-gray-200 text-gray-400 glass'
                     }`}
                   >
                     <Icon size={16} />
@@ -262,7 +262,7 @@ export default function ExpensesPage() {
                 {(['amount', 'liters'] as const).map((mode) => (
                   <button key={mode} type="button"
                     onClick={() => setForm((f) => ({ ...f, fuelMode: mode }))}
-                    className={`text-xs px-3 py-1.5 rounded-full border ${form.fuelMode === mode ? 'border-accent/50 bg-accent/10 text-accent' : 'border-white/8 text-white/35 glass'}`}
+                    className={`text-xs px-3 py-1.5 rounded-full border ${form.fuelMode === mode ? 'border-accent bg-accent text-gray-900' : 'border-gray-200 text-gray-400 glass'}`}
                   >
                     {mode === 'amount' ? 'Сумма' : 'Литры × цена'}
                   </button>
@@ -280,12 +280,12 @@ export default function ExpensesPage() {
           )}
           {form.category !== 'fuel' && (
             <div>
-              <label className="block text-xs text-white/35 mb-1.5 font-medium">Сумма, ₽ *</label>
+              <label className="block text-xs text-gray-400 mb-1.5 font-medium">Сумма, ₽ *</label>
               <input type="number" inputMode="decimal" placeholder="0" value={form.amount} onChange={(e) => setForm((f) => ({ ...f, amount: e.target.value }))} className={inp} />
             </div>
           )}
           <div>
-            <label className="block text-xs text-white/35 mb-1.5 font-medium">Комментарий{form.category === 'other' ? ' *' : ''}</label>
+            <label className="block text-xs text-gray-400 mb-1.5 font-medium">Комментарий{form.category === 'other' ? ' *' : ''}</label>
             <input type="text" placeholder="Описание..." value={form.comment} onChange={(e) => setForm((f) => ({ ...f, comment: e.target.value }))} className={inp} required={form.category === 'other'} />
           </div>
           <button type="submit" disabled={loading} className="w-full bg-accent text-black font-bold rounded-2xl py-3.5 text-sm disabled:opacity-50 mt-1 active:scale-[0.98] transition-transform">

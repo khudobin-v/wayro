@@ -39,7 +39,7 @@ export default function EditShiftPage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-4">
-        <Link href="/shifts" className="w-8 h-8 glass rounded-xl flex items-center justify-center text-white/40 hover:text-white transition-colors">
+        <Link href="/shifts" className="w-8 h-8 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors">
           <ChevronLeft size={16} />
         </Link>
         <h1 className="text-xl font-bold">Редактировать смену</h1>
@@ -54,7 +54,7 @@ export default function EditShiftPage() {
         ) : shift ? (
           <ShiftForm initial={shift as Parameters<typeof ShiftForm>[0]['initial']} isEdit />
         ) : (
-          <p className="p-5 text-white/40">Смена не найдена</p>
+          <p className="p-5 text-gray-400">Смена не найдена</p>
         )}
       </div>
     </div>

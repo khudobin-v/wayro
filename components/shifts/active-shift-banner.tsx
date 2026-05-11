@@ -49,16 +49,16 @@ export function ActiveShiftBanner() {
           <div className="absolute inset-0 rounded-full bg-accent/30 scale-150 animate-pulse" />
         </div>
         <div>
-          <p className="text-sm font-bold text-accent">Смена идёт</p>
-          <p className="text-xs text-white/35 mt-0.5 tabular-nums">{timer}</p>
+          <p className="text-sm font-bold text-gray-900">Смена идёт</p>
+          <p className="text-xs text-gray-400 mt-0.5 tabular-nums">{timer}</p>
         </div>
       </div>
       <div className="flex items-center gap-3">
         <div className="text-right">
           <p className="text-base font-bold tabular-nums">{formatMoney(gross)}</p>
-          <p className="text-xs text-white/30">{shift.ordersCount ?? 0} зак.</p>
+          <p className="text-xs text-gray-400">{shift.ordersCount ?? 0} зак.</p>
         </div>
-        <ChevronRight size={16} className="text-white/25" />
+        <ChevronRight size={16} className="text-gray-400" />
       </div>
     </Link>
   )
@@ -94,7 +94,7 @@ export function StartShiftButton() {
       disabled={loading}
       className="w-full flex items-center justify-center gap-2.5 bg-accent text-black font-bold rounded-2xl py-4 text-sm disabled:opacity-60 relative overflow-hidden group transition-all active:scale-[0.98]"
     >
-      <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute inset-0 bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity" />
       <Play size={15} fill="black" />
       {loading ? 'Запускаем...' : 'Начать смену'}
     </button>

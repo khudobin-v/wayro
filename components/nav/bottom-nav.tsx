@@ -29,14 +29,12 @@ export function BottomNav() {
               href={href}
               className={cn(
                 'flex flex-col items-center gap-1 px-2 py-1.5 rounded-2xl transition-all duration-200 min-w-0 flex-1',
-                active
-                  ? 'text-accent'
-                  : 'text-white/30 hover:text-white/60'
+                active ? 'text-gray-900' : 'text-gray-400 hover:text-gray-600'
               )}
             >
               <div className={cn(
                 'w-10 h-7 flex items-center justify-center rounded-xl transition-all duration-200',
-                active && 'bg-accent/12'
+                active ? 'bg-accent' : ''
               )}>
                 <Icon size={20} weight={active ? 'fill' : 'regular'} />
               </div>
@@ -66,8 +64,8 @@ export function SideNav() {
             className={cn(
               'flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm font-medium transition-all duration-150',
               active
-                ? 'bg-accent/10 text-accent border border-accent/15'
-                : 'text-white/35 hover:text-white/70 hover:bg-white/5 border border-transparent'
+                ? 'bg-accent text-gray-900 border border-accent'
+                : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100 border border-transparent'
             )}
           >
             <Icon size={17} weight={active ? 'fill' : 'regular'} />

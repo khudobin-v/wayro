@@ -53,11 +53,11 @@ export default function LoginPage() {
   return (
     <div className="w-full max-w-sm animate-fade-in">
       <div className="mb-8 text-center">
-        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/5 border border-white/08 mb-4">
+        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gray-50 border border-gray-200 mb-4">
           <WayroLogo size={36} />
         </div>
         <h1 className="text-2xl font-bold tracking-tight">Wayro</h1>
-        <p className="text-sm text-white/40 mt-1">Войдите в аккаунт</p>
+        <p className="text-sm text-gray-400 mt-1">Войдите в аккаунт</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3">
@@ -68,7 +68,7 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full bg-surface border border-border rounded-xl px-4 py-3.5 text-sm placeholder:text-white/30 focus:outline-none focus:border-accent/50 transition-colors"
+            className="w-full bg-surface border border-border rounded-xl px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:border-accent/50 transition-colors"
           />
         </div>
         <div>
@@ -78,7 +78,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full bg-surface border border-border rounded-xl px-4 py-3.5 text-sm placeholder:text-white/30 focus:outline-none focus:border-accent/50 transition-colors"
+            className="w-full bg-surface border border-border rounded-xl px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:border-accent/50 transition-colors"
           />
         </div>
 
@@ -96,16 +96,16 @@ export default function LoginPage() {
       </form>
 
       <div className="flex items-center gap-3 my-5">
-        <div className="flex-1 h-px bg-white/10" />
-        <span className="text-xs text-white/30">или</span>
-        <div className="flex-1 h-px bg-white/10" />
+        <div className="flex-1 h-px bg-gray-100" />
+        <span className="text-xs text-gray-400">или</span>
+        <div className="flex-1 h-px bg-gray-100" />
       </div>
 
       <div id="tg-widget" className="flex justify-center" />
 
-      <p className="text-center text-sm text-white/40 mt-6">
+      <p className="text-center text-sm text-gray-400 mt-6">
         Нет аккаунта?{' '}
-        <Link href="/register" className="text-accent hover:underline">
+        <Link href="/register" className="text-blue-600 hover:underline">
           Зарегистрироваться
         </Link>
       </p>

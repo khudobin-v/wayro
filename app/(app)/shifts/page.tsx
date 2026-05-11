@@ -72,7 +72,7 @@ export default function ShiftsPage() {
             key={p.label}
             onClick={() => setPeriod(i)}
             className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-              period === i ? 'border-accent/50 bg-accent/10 text-accent' : 'border-white/8 text-white/35 glass hover:text-white/60'
+              period === i ? 'border-accent bg-accent text-gray-900' : 'border-gray-200 text-gray-400 glass hover:text-gray-600'
             }`}
           >
             {p.label}
@@ -83,17 +83,17 @@ export default function ShiftsPage() {
       {/* Totals */}
       {shifts && shifts.length > 0 && (
         <div className="relative overflow-hidden flex gap-3 text-sm glass rounded-2xl px-4 py-3">
-          <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+          <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
           <div className="flex-1">
-            <p className="text-xs text-white/30 mb-0.5">Итого чистыми</p>
-            <p className="font-bold text-accent tabular-nums">{formatMoney(totalNet)}</p>
+            <p className="text-xs text-gray-400 mb-0.5">Итого чистыми</p>
+            <p className="font-bold text-gray-900 tabular-nums">{formatMoney(totalNet)}</p>
           </div>
           <div className="flex-1">
-            <p className="text-xs text-white/30 mb-0.5">Смен</p>
+            <p className="text-xs text-gray-400 mb-0.5">Смен</p>
             <p className="font-bold">{shifts.length}</p>
           </div>
           <div className="flex-1">
-            <p className="text-xs text-white/30 mb-0.5">Км всего</p>
+            <p className="text-xs text-gray-400 mb-0.5">Км всего</p>
             <p className="font-bold tabular-nums">{Math.round(totalKm)}</p>
           </div>
         </div>
@@ -108,7 +108,7 @@ export default function ShiftsPage() {
 
       {!isLoading && shifts?.length === 0 && (
         <div className="text-center py-16">
-          <p className="text-white/30 mb-4">Смен нет</p>
+          <p className="text-gray-400 mb-4">Смен нет</p>
           <Link href="/shifts/new" className="bg-accent text-black text-sm font-semibold px-5 py-2.5 rounded-full inline-flex items-center gap-1.5">
             <Plus size={16} /> Добавить смену
           </Link>
@@ -125,21 +125,21 @@ export default function ShiftsPage() {
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-semibold">{formatDate(s.date)}</p>
                   {s.ordersCount && (
-                    <span className="text-[10px] text-white/30 border border-white/8 rounded px-1.5 py-0.5">{s.ordersCount} зак.</span>
+                    <span className="text-[10px] text-gray-400 border border-gray-200 rounded px-1.5 py-0.5">{s.ordersCount} зак.</span>
                   )}
                 </div>
-                <p className="text-xs text-white/30 mt-0.5">
+                <p className="text-xs text-gray-400 mt-0.5">
                   {s.distanceKm} км
                   {iph ? ` · ${Math.round(iph)} ₽/ч` : ''}
                   {hours ? ` · ${hours.toFixed(1)} ч` : ''}
                 </p>
               </Link>
               <div className="flex items-center gap-3">
-                <span className="text-accent font-bold text-sm tabular-nums">{formatMoney(s.netEarnings)}</span>
-                <Link href={`/shifts/${s.id}/edit`} className="text-white/20 hover:text-white/60 p-1">
+                <span className="text-gray-900 font-bold text-sm tabular-nums">{formatMoney(s.netEarnings)}</span>
+                <Link href={`/shifts/${s.id}/edit`} className="text-gray-300 hover:text-gray-600 p-1">
                   <Pencil size={14} />
                 </Link>
-                <button onClick={() => deleteShift(s.id)} className="text-white/20 hover:text-danger p-1">
+                <button onClick={() => deleteShift(s.id)} className="text-gray-300 hover:text-danger p-1">
                   <Trash2 size={14} />
                 </button>
               </div>

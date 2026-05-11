@@ -18,16 +18,16 @@ function MonthPicker({ date, onChange }: { date: Date; onChange: (d: Date) => vo
     <div className="glass rounded-full flex items-center px-1 py-1 gap-1">
       <button
         onClick={() => onChange(subMonths(date, 1))}
-        className="w-7 h-7 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-white/8 transition-all"
+        className="w-7 h-7 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-all"
       >
         <ChevronLeft size={14} />
       </button>
-      <span className="text-sm font-semibold capitalize text-white/80 px-2 min-w-[120px] text-center">
+      <span className="text-sm font-semibold capitalize text-gray-800 px-2 min-w-[120px] text-center">
         {label}
       </span>
       <button
         onClick={() => onChange(subMonths(date, -1))}
-        className="w-7 h-7 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-white/8 transition-all disabled:opacity-20"
+        className="w-7 h-7 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-all disabled:opacity-20"
         disabled={date >= startOfMonth(new Date())}
       >
         <ChevronRight size={14} />
@@ -42,15 +42,15 @@ function ReserveBar({ name, balance, goal }: { name: string; balance: number; go
   return (
     <div className="flex-1 min-w-0">
       <div className="flex items-center justify-between mb-1.5">
-        <span className="text-sm font-medium truncate text-white/80">{name}</span>
+        <span className="text-sm font-medium truncate text-gray-800">{name}</span>
         <div className="flex items-center gap-1.5 flex-shrink-0 ml-2">
           {critical && <AlertTriangle size={11} className="text-danger" />}
           <span className="text-sm tabular-nums font-semibold">{formatMoney(balance)}</span>
-          {goal && <span className="text-xs text-white/25">/ {formatMoney(goal)}</span>}
+          {goal && <span className="text-xs text-gray-400">/ {formatMoney(goal)}</span>}
         </div>
       </div>
       {pct !== null && (
-        <div className="h-1 bg-white/8 rounded-full overflow-hidden">
+        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
           <div className={`h-full rounded-full ${critical ? 'bg-danger' : 'bg-accent'}`} style={{ width: `${pct}%` }} />
         </div>
       )}
@@ -116,23 +116,23 @@ export default function DashboardPage() {
 
           {/* Main metric */}
           <div className="glass-heavy rounded-3xl px-6 py-6 relative overflow-hidden">
-            <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            <p className="text-[10px] text-white/35 font-semibold uppercase tracking-widest mb-2">Чистый доход</p>
-            <p className={`text-5xl font-extrabold tabular-nums tracking-tight ${netPositive ? 'text-accent' : 'text-danger'}`}>
+            <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+            <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest mb-2">Чистый доход</p>
+            <p className={`text-5xl font-extrabold tabular-nums tracking-tight ${netPositive ? 'text-gray-900' : 'text-danger'}`}>
               {formatMoney(totals.net)}
             </p>
-            <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs text-white/35">
-              <span>Выплата <span className="text-white/65 font-semibold">{formatMoney(totals.gross)}</span></span>
-              <span>Расходы <span className="text-danger/80 font-semibold">−{formatMoney(totals.expenses)}</span></span>
-              <span>Резервы <span className="text-warning/80 font-semibold">−{formatMoney(totals.reserves)}</span></span>
+            <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs text-gray-400">
+              <span>Выплата <span className="text-gray-700 font-semibold">{formatMoney(totals.gross)}</span></span>
+              <span>Расходы <span className="text-danger/80 font-semibold">{formatMoney(totals.expenses)}</span></span>
+              <span>Резервы <span className="text-warning/80 font-semibold">{formatMoney(totals.reserves)}</span></span>
             </div>
             {progressPct !== null && (
               <div className="mt-5">
-                <div className="flex justify-between text-[11px] text-white/25 mb-2">
+                <div className="flex justify-between text-[11px] text-gray-400 mb-2">
                   <span>Цель {formatMoney(forecast.targetMonthlyIncome)}</span>
-                  <span className="font-semibold text-white/40">{Math.round(progressPct)}%</span>
+                  <span className="font-semibold text-gray-400">{Math.round(progressPct)}%</span>
                 </div>
-                <div className="h-1.5 bg-white/6 rounded-full overflow-hidden">
+                <div className="h-1.5 bg-gray-50 rounded-full overflow-hidden">
                   <div className="h-full rounded-full bg-accent" style={{ width: `${progressPct}%` }} />
                 </div>
               </div>
@@ -141,20 +141,20 @@ export default function DashboardPage() {
 
           {/* Recent shifts */}
           <div className="glass rounded-3xl px-5 py-4 relative overflow-hidden">
-            <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+            <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold text-sm text-white/80">Последние смены</h2>
-              <Link href="/shifts" className="text-xs text-accent/80 hover:text-accent transition-colors">Все →</Link>
+              <h2 className="font-semibold text-sm text-gray-700">Последние смены</h2>
+              <Link href="/shifts" className="text-xs text-gray-500 hover:text-gray-900 transition-colors">Все →</Link>
             </div>
             {recentShifts.length === 0 ? (
               <div className="text-center py-8">
-                <p className="text-white/25 text-sm mb-4">Смен ещё нет</p>
+                <p className="text-gray-400 text-sm mb-4">Смен ещё нет</p>
                 <Link href="/shifts/new" className="inline-flex items-center gap-1.5 bg-accent text-black text-xs font-bold px-5 py-2.5 rounded-full">
                   <Plus size={13} /> Добавить первую
                 </Link>
               </div>
             ) : (
-              <div className="divide-y divide-white/5">
+              <div className="divide-y divide-gray-100">
                 {recentShifts.map((s: {
                   id: string; date: string; netEarnings: number; distanceKm: number; startTime?: string; endTime?: string
                 }) => {
@@ -164,15 +164,15 @@ export default function DashboardPage() {
                     <Link
                       key={s.id}
                       href={`/shifts/${s.id}/edit`}
-                      className="flex items-center justify-between py-3 hover:bg-white/3 -mx-1 px-1 rounded-xl transition-colors"
+                      className="flex items-center justify-between py-3 hover:bg-gray-50 -mx-1 px-1 rounded-xl transition-colors"
                     >
                       <div>
-                        <p className="text-sm font-medium text-white/85">{formatDate(s.date)}</p>
-                        <p className="text-xs text-white/25 mt-0.5">
+                        <p className="text-sm font-medium text-gray-800">{formatDate(s.date)}</p>
+                        <p className="text-xs text-gray-400 mt-0.5">
                           {s.distanceKm} км{iph ? ` · ${Math.round(iph)} ₽/ч` : ''}
                         </p>
                       </div>
-                      <span className="text-accent font-bold text-sm tabular-nums">{formatMoney(s.netEarnings)}</span>
+                      <span className="text-gray-900 font-bold text-sm tabular-nums">{formatMoney(s.netEarnings)}</span>
                     </Link>
                   )
                 })}
@@ -193,9 +193,9 @@ export default function DashboardPage() {
               { label: 'Прогноз', value: formatMoney(Math.round(forecast.byRate)), sub: 'при текущем темпе' },
             ].map((m) => (
               <div key={m.label} className="glass rounded-2xl px-4 py-3.5">
-                <p className="text-[10px] text-white/35 font-semibold uppercase tracking-widest mb-1.5">{m.label}</p>
+                <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest mb-1.5">{m.label}</p>
                 <p className="text-base font-bold tabular-nums">{m.value}</p>
-                {m.sub && <p className="text-[11px] text-white/25 mt-1">{m.sub}</p>}
+                {m.sub && <p className="text-[11px] text-gray-400 mt-1">{m.sub}</p>}
               </div>
             ))}
           </div>
@@ -209,9 +209,9 @@ export default function DashboardPage() {
               { label: 'Прогноз', value: formatMoney(Math.round(forecast.byRate)), sub: 'при текущем темпе' },
             ].map((m) => (
               <div key={m.label} className="flex-shrink-0 glass rounded-2xl px-4 py-3.5 min-w-[130px]">
-                <p className="text-[10px] text-white/35 font-semibold uppercase tracking-widest mb-1.5">{m.label}</p>
+                <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest mb-1.5">{m.label}</p>
                 <p className="text-base font-bold tabular-nums">{m.value}</p>
-                {m.sub && <p className="text-[11px] text-white/25 mt-1">{m.sub}</p>}
+                {m.sub && <p className="text-[11px] text-gray-400 mt-1">{m.sub}</p>}
               </div>
             ))}
           </div>
@@ -219,10 +219,10 @@ export default function DashboardPage() {
           {/* Reserves */}
           {reserves.length > 0 && (
             <div className="glass rounded-3xl px-5 py-4 relative overflow-hidden">
-              <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+              <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold text-sm text-white/80">Резервы</h2>
-                <Link href="/reserves" className="text-xs text-accent/80 hover:text-accent transition-colors">Все →</Link>
+                <h2 className="font-semibold text-sm text-gray-800">Резервы</h2>
+                <Link href="/reserves" className="text-xs text-gray-500 hover:text-gray-900 transition-colors">Все →</Link>
               </div>
               <div className="space-y-4">
                 {reserves.map((r: { id: string; name: string; balance: number; goal?: number }) => (
@@ -234,12 +234,12 @@ export default function DashboardPage() {
 
           {/* Forecast */}
           <div className="glass rounded-2xl px-5 py-4 flex items-center gap-3 relative overflow-hidden">
-            <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
             <div className="w-9 h-9 rounded-xl bg-accent/10 border border-accent/15 flex items-center justify-center flex-shrink-0">
               <TrendingUp size={16} className="text-accent" />
             </div>
             <div>
-              <p className="text-[11px] text-white/30">Прогноз по среднему</p>
+              <p className="text-[11px] text-gray-400">Прогноз по среднему</p>
               <p className="text-sm font-bold mt-0.5">{formatMoney(Math.round(forecast.byShifts))}</p>
             </div>
           </div>

@@ -45,7 +45,7 @@ async function handleMessage(chatId: number, text: string) {
     await sendMessage(chatId,
       `📊 <b>Статистика за ${month}</b>\n\n` +
       `💰 Выплата: <b>${fmt(gross)}</b>\n` +
-      `💸 Расходы: <b>−${fmt(exp)}</b>\n` +
+      `💸 Расходы: <b>${fmt(exp)}</b>\n` +
       `✅ Чистыми: <b>${fmt(net)}</b>\n\n` +
       `🚗 Смен: ${shifts.length}\n` +
       `📦 Заказов: ${shifts.reduce((s, sh) => s + sh.ordersCount, 0)}`

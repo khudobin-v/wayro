@@ -154,15 +154,15 @@ export function ShiftForm({ initial, isEdit }: ShiftFormProps) {
     }
   }
 
-  const inputCls = 'w-full glass rounded-xl px-4 py-3 text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/30 transition-colors tabular-nums'
-  const labelCls = 'block text-xs font-medium text-white/35 mb-1.5'
+  const inputCls = 'w-full glass rounded-xl px-4 py-3 text-sm placeholder:text-gray-300 focus:outline-none focus:border-accent/30 transition-colors tabular-nums'
+  const labelCls = 'block text-xs font-medium text-gray-400 mb-1.5'
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 px-5 py-5">
       {hasDraft && !isEdit && (
         <div className="flex items-center justify-between bg-warning/10 border border-warning/20 rounded-xl px-4 py-3">
           <p className="text-xs text-warning">Найден сохранённый черновик</p>
-          <button type="button" onClick={clearDraft} className="text-xs text-white/50 hover:text-white">
+          <button type="button" onClick={clearDraft} className="text-xs text-gray-500 hover:text-gray-900">
             Очистить
           </button>
         </div>
@@ -181,7 +181,7 @@ export function ShiftForm({ initial, isEdit }: ShiftFormProps) {
                 key={label}
                 type="button"
                 onClick={() => setForm((f) => ({ ...f, date: val }))}
-                className={`text-xs py-2 rounded-xl border transition-colors ${form.date === val ? 'border-accent/50 bg-accent/10 text-accent' : 'border-white/8 text-white/35 glass hover:text-white/70'}`}
+                className={`text-xs py-2 rounded-xl border transition-colors ${form.date === val ? 'border-accent bg-accent text-gray-900' : 'border-gray-200 text-gray-400 glass hover:text-gray-700'}`}
               >
                 {label}
               </button>
@@ -191,7 +191,7 @@ export function ShiftForm({ initial, isEdit }: ShiftFormProps) {
             type="date"
             value={form.date}
             onChange={set('date')}
-            className="col-span-1 text-xs glass rounded-xl px-2 py-2 text-center text-white/35 focus:outline-none focus:border-accent/30"
+            className="col-span-1 text-xs glass rounded-xl px-2 py-2 text-center text-gray-400 focus:outline-none focus:border-accent/30"
           />
         </div>
       </div>
@@ -221,10 +221,10 @@ export function ShiftForm({ initial, isEdit }: ShiftFormProps) {
         />
       </div>
 
-      <div className="h-px bg-white/6" />
+      <div className="h-px bg-gray-50" />
 
       {/* Earnings from Yandex Pro */}
-      <p className="text-xs font-medium text-white/30 uppercase tracking-wide">Данные из Яндекс Про</p>
+      <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Данные из Яндекс Про</p>
 
       <div>
         <label className={labelCls}>Заработок (грязный) *</label>
@@ -261,13 +261,13 @@ export function ShiftForm({ initial, isEdit }: ShiftFormProps) {
       {/* Net earnings calc */}
       <div className="bg-accent/5 border border-accent/10 rounded-xl px-4 py-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs text-white/50">Чистый заработок</span>
-          <span className="text-base font-bold text-accent tabular-nums">{formatMoney(calcNet)}</span>
+          <span className="text-xs text-gray-500">Чистый заработок</span>
+          <span className="text-base font-bold text-gray-900 tabular-nums">{formatMoney(calcNet)}</span>
         </div>
-        <p className="text-[11px] text-white/25 mt-1">Грязный + Бонусы + Чаевые − Комиссии − Налог</p>
+        <p className="text-[11px] text-gray-400 mt-1">Грязный + Бонусы + Чаевые − Комиссии − Налог</p>
       </div>
 
-      <div className="h-px bg-white/6" />
+      <div className="h-px bg-gray-50" />
 
       {/* Optional */}
       <div>

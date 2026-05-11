@@ -64,7 +64,7 @@ export default function ShiftDetailPage() {
         <div className="flex items-center gap-3">
           <Link
             href="/shifts"
-            className="w-8 h-8 glass rounded-xl flex items-center justify-center text-white/40 hover:text-white transition-colors"
+            className="w-8 h-8 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors"
           >
             <ChevronLeft size={16} />
           </Link>
@@ -75,7 +75,7 @@ export default function ShiftDetailPage() {
         {shift && (
           <Link
             href={`/shifts/${id}/edit`}
-            className="w-8 h-8 glass rounded-xl flex items-center justify-center text-white/40 hover:text-white transition-colors"
+            className="w-8 h-8 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors"
           >
             <Pencil size={14} />
           </Link>
@@ -95,67 +95,67 @@ export default function ShiftDetailPage() {
           {/* Shift summary */}
           <div className="glass-heavy rounded-2xl px-4 py-4 space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-white/40">Чистый заработок</span>
-              <span className="text-lg font-bold text-accent tabular-nums">{formatMoney(shift.netEarnings)}</span>
+              <span className="text-sm text-gray-400">Чистый заработок</span>
+              <span className="text-lg font-bold text-gray-900 tabular-nums">{formatMoney(shift.netEarnings)}</span>
             </div>
-            <div className="h-px bg-white/6" />
+            <div className="h-px bg-gray-50" />
             <div className="grid grid-cols-2 gap-y-2 text-sm">
-              <span className="text-white/40">Грязный</span>
+              <span className="text-gray-400">Грязный</span>
               <span className="text-right tabular-nums">{formatMoney(shift.grossEarnings)}</span>
               {shift.bonuses > 0 && <>
-                <span className="text-white/40">Бонусы</span>
+                <span className="text-gray-400">Бонусы</span>
                 <span className="text-right tabular-nums">+{formatMoney(shift.bonuses)}</span>
               </>}
               {shift.tips > 0 && <>
-                <span className="text-white/40">Чаевые</span>
+                <span className="text-gray-400">Чаевые</span>
                 <span className="text-right tabular-nums">+{formatMoney(shift.tips)}</span>
               </>}
               {shift.parkCommission > 0 && <>
-                <span className="text-white/40">Комиссия парка</span>
+                <span className="text-gray-400">Комиссия парка</span>
                 <span className="text-right tabular-nums text-danger/80">−{formatMoney(shift.parkCommission)}</span>
               </>}
               {shift.serviceCommission > 0 && <>
-                <span className="text-white/40">Комиссия сервиса</span>
+                <span className="text-gray-400">Комиссия сервиса</span>
                 <span className="text-right tabular-nums text-danger/80">−{formatMoney(shift.serviceCommission)}</span>
               </>}
               {shift.taxDeduction > 0 && <>
-                <span className="text-white/40">В счёт налога</span>
+                <span className="text-gray-400">В счёт налога</span>
                 <span className="text-right tabular-nums text-danger/80">−{formatMoney(shift.taxDeduction)}</span>
               </>}
             </div>
-            <div className="h-px bg-white/6" />
+            <div className="h-px bg-gray-50" />
             <div className="grid grid-cols-3 gap-2 text-sm">
               <div>
-                <p className="text-xs text-white/30 mb-0.5">Пробег</p>
+                <p className="text-xs text-gray-400 mb-0.5">Пробег</p>
                 <p className="font-semibold tabular-nums">{shift.distanceKm} км</p>
               </div>
               {hours && (
                 <div>
-                  <p className="text-xs text-white/30 mb-0.5">Время</p>
+                  <p className="text-xs text-gray-400 mb-0.5">Время</p>
                   <p className="font-semibold tabular-nums">{hours.toFixed(1)} ч</p>
                 </div>
               )}
               {shift.startTime && shift.endTime && (
                 <div>
-                  <p className="text-xs text-white/30 mb-0.5">Период</p>
+                  <p className="text-xs text-gray-400 mb-0.5">Период</p>
                   <p className="font-semibold tabular-nums">{formatTime(shift.startTime)}–{formatTime(shift.endTime)}</p>
                 </div>
               )}
             </div>
             {shift.comment && (
-              <p className="text-xs text-white/30 italic">{shift.comment}</p>
+              <p className="text-xs text-gray-400 italic">{shift.comment}</p>
             )}
           </div>
 
           {/* Orders list */}
           <div>
-            <p className="text-xs font-medium text-white/30 uppercase tracking-wide mb-2">
+            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
               Заказы {orders.length > 0 ? `· ${orders.length}` : ''}
             </p>
             {orders.length === 0 ? (
               <div className="glass rounded-2xl px-4 py-6 text-center">
-                <p className="text-sm text-white/25">Заказы не записывались</p>
-                <p className="text-xs text-white/15 mt-1">Заказы сохраняются только при живой смене</p>
+                <p className="text-sm text-gray-400">Заказы не записывались</p>
+                <p className="text-xs text-gray-300 mt-1">Заказы сохраняются только при живой смене</p>
               </div>
             ) : (
               <div className="space-y-1.5">
@@ -164,11 +164,11 @@ export default function ShiftDetailPage() {
                     <div>
                       <span className="text-sm">{typeLabel[order.type] ?? order.type}</span>
                       {order.note && (
-                        <p className="text-xs text-white/30 mt-0.5">{order.note}</p>
+                        <p className="text-xs text-gray-400 mt-0.5">{order.note}</p>
                       )}
-                      <p className="text-xs text-white/25 mt-0.5">{formatTime(order.createdAt)}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{formatTime(order.createdAt)}</p>
                     </div>
-                    <span className={`text-sm font-semibold tabular-nums ${order.amount >= 0 ? 'text-accent' : 'text-danger'}`}>
+                    <span className={`text-sm font-semibold tabular-nums ${order.amount >= 0 ? 'text-gray-900' : 'text-danger'}`}>
                       {formatMoney(order.amount, true)}
                     </span>
                   </div>

@@ -11,7 +11,7 @@ import { Modal } from '@/components/ui/modal'
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const TYPE_COLORS: Record<string, string> = {
-  delivery: 'text-accent',
+  delivery: 'text-gray-900',
   bonus: 'text-blue-400',
   tip: 'text-amber-400',
 }
@@ -52,8 +52,8 @@ function Numpad({ value, onChange }: { value: string; onChange: (v: string) => v
         <button
           key={k}
           onPointerDown={(e) => { e.preventDefault(); press(k) }}
-          className={`h-14 rounded-2xl text-xl font-semibold flex items-center justify-center transition-all active:scale-95 active:bg-white/10 glass ${
-            k === '⌫' ? 'text-white/35' : 'text-white'
+          className={`h-14 rounded-2xl text-xl font-semibold flex items-center justify-center transition-all active:scale-95 active:bg-gray-100 glass ${
+            k === '⌫' ? 'text-gray-400' : 'text-gray-900'
           }`}
         >
           {k}
@@ -70,30 +70,30 @@ function FinishModal({ open, onClose, onFinish, loading }: {
   loading: boolean
 }) {
   const [form, setForm] = useState({ distanceKm: '', parkCommission: '0', serviceCommission: '0', comment: '' })
-  const inp = 'w-full glass rounded-xl px-4 py-3 text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/40 tabular-nums border-transparent'
+  const inp = 'w-full glass rounded-xl px-4 py-3 text-sm placeholder:text-gray-300 focus:outline-none focus:border-accent/40 tabular-nums border-transparent'
 
   return (
     <Modal open={open} onClose={onClose} title="Завершить смену">
       <div className="px-5 py-4 space-y-3">
         <div>
-          <label className="block text-xs text-white/35 mb-1.5 font-medium">Пробег за смену (км) *</label>
+          <label className="block text-xs text-gray-400 mb-1.5 font-medium">Пробег за смену (км) *</label>
           <input type="number" inputMode="decimal" placeholder="0" value={form.distanceKm}
             onChange={(e) => setForm((f) => ({ ...f, distanceKm: e.target.value }))} className={inp} />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs text-white/35 mb-1.5 font-medium">Комиссия парка</label>
+            <label className="block text-xs text-gray-400 mb-1.5 font-medium">Комиссия парка</label>
             <input type="number" inputMode="decimal" placeholder="0" value={form.parkCommission}
               onChange={(e) => setForm((f) => ({ ...f, parkCommission: e.target.value }))} className={inp} />
           </div>
           <div>
-            <label className="block text-xs text-white/35 mb-1.5 font-medium">Комиссия сервиса</label>
+            <label className="block text-xs text-gray-400 mb-1.5 font-medium">Комиссия сервиса</label>
             <input type="number" inputMode="decimal" placeholder="0" value={form.serviceCommission}
               onChange={(e) => setForm((f) => ({ ...f, serviceCommission: e.target.value }))} className={inp} />
           </div>
         </div>
         <div>
-          <label className="block text-xs text-white/35 mb-1.5 font-medium">Комментарий</label>
+          <label className="block text-xs text-gray-400 mb-1.5 font-medium">Комментарий</label>
           <input type="text" placeholder="Заметки..." value={form.comment}
             onChange={(e) => setForm((f) => ({ ...f, comment: e.target.value }))} className={inp} />
         </div>
@@ -227,26 +227,26 @@ return (
     <div className="flex flex-col min-h-[calc(100dvh-96px)] animate-fade-in">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <button onClick={() => router.push('/dashboard')} className="w-8 h-8 glass rounded-xl flex items-center justify-center text-white/40 hover:text-white transition-colors">
+        <button onClick={() => router.push('/dashboard')} className="w-8 h-8 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors">
           <ChevronLeft size={16} />
         </button>
         <div className="glass rounded-full px-4 py-1.5 flex items-center gap-2">
           <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-          <span className="text-sm font-semibold text-white/80 tabular-nums">{timer}</span>
+          <span className="text-sm font-semibold text-gray-800 tabular-nums">{timer}</span>
         </div>
-        <button onClick={() => setShowCancel(true)} className="w-8 h-8 glass rounded-xl flex items-center justify-center text-white/25 hover:text-danger transition-colors">
+        <button onClick={() => setShowCancel(true)} className="w-8 h-8 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-danger transition-colors">
           <XCircle size={16} />
         </button>
       </div>
 
       {/* Earnings display */}
       <div className="text-center py-3">
-        <p className="text-[10px] text-white/30 font-semibold uppercase tracking-widest mb-2">Заработано</p>
-        <p className="text-6xl font-extrabold tabular-nums tracking-tight text-white">
+        <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest mb-2">Заработано</p>
+        <p className="text-6xl font-extrabold tabular-nums tracking-tight text-gray-900">
           {formatMoney(gross)}
         </p>
-        <div className="flex items-center justify-center gap-3 mt-3 text-xs text-white/30">
-          <span>Доставка <span className="text-accent font-semibold">{formatMoney(shift.grossEarnings ?? 0)}</span></span>
+        <div className="flex items-center justify-center gap-3 mt-3 text-xs text-gray-400">
+          <span>Доставка <span className="text-gray-900 font-semibold">{formatMoney(shift.grossEarnings ?? 0)}</span></span>
           {(shift.bonuses ?? 0) > 0 && <span>Бонусы <span className="text-blue-400 font-semibold">{formatMoney(shift.bonuses)}</span></span>}
           {(shift.tips ?? 0) > 0 && <span>Чаевые <span className="text-amber-400 font-semibold">{formatMoney(shift.tips)}</span></span>}
         </div>
@@ -255,10 +255,10 @@ return (
       {/* Amount display */}
       <div className="text-center mb-3">
         <div className="inline-flex items-baseline gap-1">
-          <span className={`text-4xl font-bold tabular-nums transition-colors ${parseFloat(amount) > 0 ? 'text-white' : 'text-white/20'}`}>
+          <span className={`text-4xl font-bold tabular-nums transition-colors ${parseFloat(amount) > 0 ? 'text-gray-900' : 'text-gray-300'}`}>
             {amount}
           </span>
-          <span className={`text-2xl font-bold ${parseFloat(amount) > 0 ? 'text-white/50' : 'text-white/10'}`}>₽</span>
+          <span className={`text-2xl font-bold ${parseFloat(amount) > 0 ? 'text-gray-500' : 'text-gray-200'}`}>₽</span>
         </div>
       </div>
 
@@ -297,18 +297,18 @@ return (
       {/* Orders list */}
       {orders.length > 0 && (
         <div className="mt-4 px-1">
-          <p className="text-[10px] text-white/25 font-semibold uppercase tracking-widest mb-2 px-1">
+          <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest mb-2 px-1">
             Заказы · {orders.length} шт.
           </p>
           <div className="space-y-1.5 max-h-40 overflow-y-auto scrollbar-none">
             {[...orders].reverse().map((o) => (
               <div key={o.id} className="glass flex items-center justify-between rounded-xl px-4 py-2.5">
-                <span className={`text-xs font-semibold ${TYPE_COLORS[o.type] ?? 'text-white/50'}`}>
+                <span className={`text-xs font-semibold ${TYPE_COLORS[o.type] ?? 'text-gray-500'}`}>
                   {TYPE_LABELS[o.type] ?? o.type}
                 </span>
                 <div className="flex items-center gap-3">
                   <span className="text-sm font-bold tabular-nums">{formatMoney(o.amount)}</span>
-                  <button onClick={() => deleteOrder(o.id)} className="text-white/15 hover:text-danger transition-colors p-0.5">
+                  <button onClick={() => deleteOrder(o.id)} className="text-gray-300 hover:text-danger transition-colors p-0.5">
                     <Trash2 size={12} />
                   </button>
                 </div>
@@ -332,11 +332,11 @@ return (
 
       <Modal open={showCancel} onClose={() => setShowCancel(false)} title="Отменить смену?">
         <div className="px-5 py-4 space-y-3">
-          <p className="text-sm text-white/40">Все добавленные заказы будут удалены.</p>
+          <p className="text-sm text-gray-400">Все добавленные заказы будут удалены.</p>
           <button onClick={handleCancel} className="w-full glass border border-danger/20 text-danger font-bold rounded-2xl py-3.5 text-sm active:scale-[0.98] transition-transform">
             Да, отменить
           </button>
-          <button onClick={() => setShowCancel(false)} className="w-full text-white/30 text-sm py-2">
+          <button onClick={() => setShowCancel(false)} className="w-full text-gray-400 text-sm py-2">
             Вернуться
           </button>
         </div>

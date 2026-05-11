@@ -31,11 +31,11 @@ export function Modal({ open, onClose, title, children, className }: ModalProps)
         )}
       >
         {/* Top shine */}
-        <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
         {title && (
-          <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-white/6">
+          <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-gray-200">
             <h2 className="font-semibold text-base">{title}</h2>
-            <button onClick={onClose} className="w-7 h-7 glass rounded-lg flex items-center justify-center text-white/35 hover:text-white transition-colors">
+            <button onClick={onClose} className="w-7 h-7 glass rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors">
               <X size={14} />
             </button>
           </div>

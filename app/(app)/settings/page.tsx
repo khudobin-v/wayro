@@ -107,13 +107,13 @@ export default function SettingsPage() {
     setForm((f) => ({ ...f, taxMode: mode, taxPercent: t?.pct != null ? String(t.pct) : f.taxPercent }))
   }
 
-  const inp = 'w-full glass rounded-xl px-4 py-3 text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/30 transition-colors tabular-nums'
-  const label = 'block text-xs text-white/40 mb-1.5'
+  const inp = 'w-full glass rounded-xl px-4 py-3 text-sm placeholder:text-gray-300 focus:outline-none focus:border-accent/30 transition-colors tabular-nums'
+  const label = 'block text-xs text-gray-400 mb-1.5'
 
   function Section({ title, children }: { title: string; children: React.ReactNode }) {
     return (
       <div className="glass rounded-2xl px-5 py-4">
-        <h2 className="font-semibold text-sm text-white/60 uppercase tracking-wide text-[11px] mb-4">{title}</h2>
+        <h2 className="font-semibold text-sm text-gray-600 uppercase tracking-wide text-[11px] mb-4">{title}</h2>
         <div className="space-y-3">{children}</div>
       </div>
     )
@@ -123,7 +123,7 @@ export default function SettingsPage() {
     <div className="space-y-4 animate-fade-in">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold">Настройки</h1>
-        {me && <p className="text-xs text-white/30">{me.email}</p>}
+        {me && <p className="text-xs text-gray-400">{me.email}</p>}
       </div>
 
       <form onSubmit={save} className="space-y-4">
@@ -149,7 +149,7 @@ export default function SettingsPage() {
                 key={m.key}
                 type="button"
                 onClick={() => handleTaxMode(m.key)}
-                className={`text-xs py-2 px-3 rounded-xl border text-left transition-colors ${form.taxMode === m.key ? 'border-accent/50 bg-accent/10 text-accent' : 'border-white/8 text-white/35 glass hover:text-white/60'}`}
+                className={`text-xs py-2 px-3 rounded-xl border text-left transition-colors ${form.taxMode === m.key ? 'border-accent bg-accent text-gray-900' : 'border-gray-200 text-gray-400 glass hover:text-gray-600'}`}
               >
                 {m.label}
               </button>
