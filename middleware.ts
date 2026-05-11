@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getAuthFromRequest } from './lib/auth'
 
 const PUBLIC_PATHS = ['/login', '/register', '/api/auth/login', '/api/auth/register', '/api/auth/telegram', '/api/telegram/webhook', '/api/cron/']
+// Note: /api/auth/telegram-widget is a GET redirect — matched by /api/auth/telegram prefix above
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
