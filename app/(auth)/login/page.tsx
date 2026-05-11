@@ -1,23 +1,22 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { WayroLogo } from '@/components/ui/wayro-logo'
 
 export default function LoginPage() {
   const router = useRouter()
-  const searchParams = useSearchParams()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-
-  useEffect(() => {
-    if (searchParams.get('error')) setError('Ошибка авторизации через Telegram')
-  }, [searchParams])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('error')) {
+      setError('Ошибка авторизации через Telegram')
+    }
+
     const script = document.createElement('script')
     script.src = 'https://telegram.org/js/telegram-widget.js?22'
     script.setAttribute('data-telegram-login', 'wayro_trackerbot')
