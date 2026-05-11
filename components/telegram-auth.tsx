@@ -8,28 +8,32 @@ export function TelegramAuth() {
   const pathname = usePathname()
 
   useEffect(() => {
-    const tg = (window as any).Telegram?.WebApp
-    if (!tg) return
+    try {
+      const tg = (window as any).Telegram?.WebApp
+      if (!tg) return
 
-    tg.ready()
-    tg.expand()
-    tg.requestFullscreen?.()
-    tg.disableVerticalSwipes?.()
+      tg.ready()
+      tg.expand()
+      tg.requestFullscreen?.()
+      tg.disableVerticalSwipes?.()
 
-    const initData = tg.initData
-    if (!initData) return
+      const initData = tg.initData
+      if (!initData) return
 
-    const authPages = ['/login', '/register']
-    if (!authPages.includes(pathname)) return
+      const authPages = ['/login', '/register']
+      if (!authPages.includes(pathname)) return
 
-    fetch('/api/auth/telegram', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ initData }),
-      credentials: 'include',
-    }).then((r) => {
-      if (r.ok) router.replace('/dashboard')
-    })
+      fetch('/api/auth/telegram', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ initData }),
+        credentials: 'include',
+      }).then((r) => {
+        if (r.ok) router.replace('/dashboard')
+      })
+    } catch {
+      // Not in Telegram WebApp context
+    }
   }, [pathname, router])
 
   return null

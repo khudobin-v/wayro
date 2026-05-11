@@ -85,7 +85,7 @@ export default function AnalyticsPage() {
       <Section title="Доход по месяцам">
         {monthlyLoading ? (
           <Skeleton className="h-44" />
-        ) : monthly ? (
+        ) : Array.isArray(monthly) ? (
           <ResponsiveContainer width="100%" height={176}>
             <BarChart
               data={monthly}
@@ -120,7 +120,7 @@ export default function AnalyticsPage() {
                   formatter={(v: number) => v > 0 ? formatK(v) : ''}
                   style={{ fill: 'rgba(255,255,255,0.35)', fontSize: 10, fontWeight: 500 }}
                 />
-                {(monthly as { net: number }[]).map((entry, i) => (
+                {Array.isArray(monthly) && (monthly as { net: number }[]).map((entry, i) => (
                   <Cell key={i} fill={entry.net > 0 ? '#4ADE80' : 'rgba(248,113,113,0.7)'} />
                 ))}
               </Bar>
