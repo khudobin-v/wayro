@@ -28,6 +28,7 @@ export default function EditShiftPage() {
           tips: String(data.tips),
           parkCommission: String(data.parkCommission),
           serviceCommission: String(data.serviceCommission),
+          taxDeduction: String(data.taxDeduction ?? 0),
           ordersCount: data.ordersCount ? String(data.ordersCount) : '',
           comment: data.comment ?? '',
         })

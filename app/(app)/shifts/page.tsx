@@ -121,7 +121,7 @@ export default function ShiftsPage() {
           const iph = hours && hours > 0 ? s.netEarnings / hours : null
           return (
             <div key={s.id} className="glass rounded-2xl px-4 py-3.5 flex items-center gap-3">
-              <div className="flex-1 min-w-0">
+              <Link href={`/shifts/${s.id}`} className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-semibold">{formatDate(s.date)}</p>
                   {s.ordersCount && (
@@ -133,7 +133,7 @@ export default function ShiftsPage() {
                   {iph ? ` · ${Math.round(iph)} ₽/ч` : ''}
                   {hours ? ` · ${hours.toFixed(1)} ч` : ''}
                 </p>
-              </div>
+              </Link>
               <div className="flex items-center gap-3">
                 <span className="text-accent font-bold text-sm tabular-nums">{formatMoney(s.netEarnings)}</span>
                 <Link href={`/shifts/${s.id}/edit`} className="text-white/20 hover:text-white/60 p-1">

@@ -17,6 +17,7 @@ interface ShiftFormData {
   tips: string
   parkCommission: string
   serviceCommission: string
+  taxDeduction: string
   ordersCount: string
   comment: string
 }
@@ -33,6 +34,7 @@ const emptyForm: ShiftFormData = {
   tips: '0',
   parkCommission: '0',
   serviceCommission: '0',
+  taxDeduction: '0',
   ordersCount: '',
   comment: '',
 }
@@ -77,6 +79,7 @@ export function ShiftForm({ initial, isEdit }: ShiftFormProps) {
     tips: n(form.tips),
     parkCommission: n(form.parkCommission),
     serviceCommission: n(form.serviceCommission),
+    taxDeduction: n(form.taxDeduction),
   })
 
   const mismatch = Math.abs(calcNet) > 0.01
@@ -84,7 +87,7 @@ export function ShiftForm({ initial, isEdit }: ShiftFormProps) {
   function set(key: keyof ShiftFormData) {
     return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       let v = e.target.value
-      if (['distanceKm', 'grossEarnings', 'bonuses', 'tips', 'parkCommission', 'serviceCommission'].includes(key)) {
+      if (['distanceKm', 'grossEarnings', 'bonuses', 'tips', 'parkCommission', 'serviceCommission', 'taxDeduction'].includes(key)) {
         v = v.replace(',', '.')
       }
       setForm((prev) => ({ ...prev, [key]: v }))
@@ -115,6 +118,7 @@ export function ShiftForm({ initial, isEdit }: ShiftFormProps) {
         tips: n(form.tips),
         parkCommission: n(form.parkCommission),
         serviceCommission: n(form.serviceCommission),
+        taxDeduction: n(form.taxDeduction),
         ordersCount: form.ordersCount ? parseInt(form.ordersCount) : null,
         comment: form.comment || null,
       }
@@ -249,13 +253,18 @@ export function ShiftForm({ initial, isEdit }: ShiftFormProps) {
         </div>
       </div>
 
+      <div>
+        <label className={labelCls}>В счёт налога</label>
+        <input type="number" inputMode="decimal" placeholder="0" value={form.taxDeduction} onChange={set('taxDeduction')} className={inputCls} />
+      </div>
+
       {/* Net earnings calc */}
       <div className="bg-accent/5 border border-accent/10 rounded-xl px-4 py-3">
         <div className="flex items-center justify-between">
           <span className="text-xs text-white/50">Чистый заработок</span>
           <span className="text-base font-bold text-accent tabular-nums">{formatMoney(calcNet)}</span>
         </div>
-        <p className="text-[11px] text-white/25 mt-1">Грязный + Бонусы + Чаевые − Комиссии</p>
+        <p className="text-[11px] text-white/25 mt-1">Грязный + Бонусы + Чаевые − Комиссии − Налог</p>
       </div>
 
       <div className="h-px bg-white/6" />

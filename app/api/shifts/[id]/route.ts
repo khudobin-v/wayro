@@ -15,6 +15,7 @@ const shiftSchema = z.object({
   tips: z.coerce.number().min(0).default(0),
   parkCommission: z.coerce.number().min(0).default(0),
   serviceCommission: z.coerce.number().min(0).default(0),
+  taxDeduction: z.coerce.number().min(0).default(0),
   ordersCount: z.coerce.number().int().min(0).optional().nullable(),
   comment: z.string().optional().nullable(),
 })
@@ -63,6 +64,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       tips: data.tips,
       parkCommission: data.parkCommission,
       serviceCommission: data.serviceCommission,
+      taxDeduction: data.taxDeduction,
       netEarnings,
       ordersCount: data.ordersCount ?? undefined,
       comment: data.comment ?? null,

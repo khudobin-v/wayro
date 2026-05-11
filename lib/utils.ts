@@ -63,13 +63,15 @@ export function calcNetEarnings(data: {
   tips: number
   parkCommission: number
   serviceCommission: number
+  taxDeduction?: number
 }): number {
   return (
     data.grossEarnings +
     data.bonuses +
     data.tips -
     data.parkCommission -
-    data.serviceCommission
+    data.serviceCommission -
+    (data.taxDeduction ?? 0)
   )
 }
 

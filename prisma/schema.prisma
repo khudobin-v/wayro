@@ -46,6 +46,7 @@ model Shift {
   tips              Float          @default(0)
   parkCommission    Float          @default(0)
   serviceCommission Float          @default(0)
+  taxDeduction      Float          @default(0)
   netEarnings       Float          @default(0)
   ordersCount       Int            @default(0)
   comment           String?
